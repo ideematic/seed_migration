@@ -91,7 +91,7 @@ module SeedMigration
     end
 
     def self.last_migration
-      return SeedMigration::DataMigration.maximum("version")
+      return SeedMigration::DataMigration.max("version")
     end
 
     def self.rollback_migrations(filename = nil, steps = 1)
