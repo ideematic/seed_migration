@@ -237,18 +237,10 @@ module SeedMigration
 # it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
-
-ActiveRecord::Base.transaction do
         eos
         SeedMigration.registrar.each do |register_entry|
-          register_entry.model.order('id').each do |instance|
+          register_entry.model.order_by(:id.asc).each do |instance|
             file.write generate_model_creation_string(instance, register_entry)
-          end
-
-          if !SeedMigration.ignore_ids
-            file.write <<-eos
-  ActiveRecord::Base.connection.reset_pk_sequence!('#{register_entry.model.table_name}')
-            eos
           end
         end
         file.write <<-eos
