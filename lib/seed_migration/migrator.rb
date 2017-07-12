@@ -244,8 +244,6 @@ module SeedMigration
           end
         end
         file.write <<-eos
-end
-
 SeedMigration::Migrator.bootstrap(#{last_migration})
         eos
       end
@@ -269,8 +267,7 @@ SeedMigration::Migrator.bootstrap(#{last_migration})
 
       # With pretty indents, please.
       return <<-eos
-
-  #{model_creation_string}
+#{model_creation_string}
       eos
     end
 
